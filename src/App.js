@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Todos from './todos'
 
 class App extends Component {
+  state = {
+    todos: [
+      {id: 1, content: 'comprar coca'},
+      {id: 2, content: 'jogar zelda'},
+    ]
+  };
+  deleteTodo = (id) => {
+    const todos = this.state.todos.filter(todo => {
+      return todo.id !== id
+    })
+    this.setState({todos})
+  }
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="todo-app container">
+        <h1 className="center blue-text"> Todo's </h1>
+        <Todos deleteTodo={this.deleteTodo} todos={this.state.todos}/>
       </div>
     );
   }
